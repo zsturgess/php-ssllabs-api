@@ -14,6 +14,16 @@ class sslLabsApi
 {
 	CONST API_URL = "https://api.ssllabs.com/api/v2";
 	
+	private $returnJsonObjects;
+	
+	/**
+	 * sslLabsApi::__construct()
+	 */
+	public function __construct($returnJsonObjects = false)
+	{
+		$this->returnJsonObjects = (boolean) $returnJsonObjects;
+	}
+	
 	/**
 	 * sslLabsApi::fetchApiInfo()
 	 * 
@@ -135,7 +145,39 @@ class sslLabsApi
 			)
 		);
 		
-		return (file_get_contents(self::API_URL . '/' . $apiCall . $this->buildGetParameterString($parameters), false, $context));	
+		$apiResponse = file_get_contents(self::API_URL . '/' . $apiCall . $this->buildGetParameterString($parameters), false, $context);
+		
+		if($this->returnJsonObjects)
+		{
+			return (json_decode($apiResponse));
+		}		
+		
+		return ($apiResponse);	
+	}
+	
+	/**
+	 * sslLabsApi::setReturnJsonObjects()
+	 * 
+	 * Setter for returnJsonObjects
+	 * Set true to return all API responses as JSON object, false returns it as simple JSON strings (default)
+	 *  
+	 * @param boolean $returnJsonObjects
+	 */
+	public function setReturnJsonObjects($returnJsonObjects)
+	{
+		$this->returnJsonObjects = (boolean) $returnJsonObjects;
+	}
+	
+	/**
+	 * sslLabsApi::getReturnJsonObjects()
+	 * 
+	 * Getter for returnJsonObjects
+	 * 
+	 * @return boolean true returns all API responses as JSON object, false returns it as simple JSON string
+	 */
+	public function getReturnJsonObjects()
+	{
+		return ($this->returnJsonObjects);
 	}
 	
 	/**
