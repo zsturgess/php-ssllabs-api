@@ -7,28 +7,32 @@ It's build upon the official API documentation at https://github.com/ssllabs/ssl
 
 require_once 'sslLabsApi.php';
 
+//Return API response as JSON string
 $api = new sslLabsApi();
+
+//Return API response as JSON object
+//$api = new sslLabsApi(true);
 
 //Set content-type header for JSON output
 header('Content-Type: application/json');
 
 //get API information
-echo $api->fetchApiInfo();
+var_dump($api->fetchApiInfo());
 
 ?>
 ```
-
-## fetchApiInfo()
+## Methods
+### fetchApiInfo()
 No parameters needed
 
 Returns an Info object (see https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs.md#info).
 
-## fetchStatusCodes()
+### fetchStatusCodes()
 No parameters needed
 
 Returns a StatusCodes instance (see https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs.md#statuscodes).
 
-## fetchHostInformation()
+### fetchHostInformation()
 See https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs.md#invoke-assessment-and-check-progress for parameter description.
 
 | Parameter           | Type    | Default value |          |
@@ -45,7 +49,7 @@ Returns a Host object (see https://github.com/ssllabs/ssllabs-scan/blob/master/s
 
 Make sure to check the 'status' attribute inside Host object.
 
-## fetchHostInformationCached()
+### fetchHostInformationCached()
 You can also use fetchHostInformation() with the proper parameters, this is just a helper function.
 
 | Parameter           | Type    | Default value |          |
@@ -59,7 +63,7 @@ Returns a Host object (see https://github.com/ssllabs/ssllabs-scan/blob/master/s
 
 Also make sure to check the 'status' attribute inside Host object.
 
-## fetchEndpointData()
+### fetchEndpointData()
 See https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs.md#retrieve-detailed-endpoint-information for parameter description.
 
 | Parameter      | Type    | Default value |          |
@@ -70,7 +74,7 @@ See https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs.md#retr
 
 Returns an Endpoint object (see https://github.com/ssllabs/ssllabs-scan/blob/master/ssllabs-api-docs.md#endpoint).
 
-## Custom API calls
+### Custom API calls
 Use sendApiRequest() method to create custom API calls.
 
 | Parameter       | Type   | Default value |          |
@@ -82,7 +86,17 @@ Use sendApiRequest() method to create custom API calls.
 $api->sendApiRequest('apiCallName', array('p1' => 'p1_value', 'p2' => 'p2_value'));
 ```
 
-## Example output
+### getReturnJsonObjects()
+Getter for returnJsonObjects
+
+### setReturnJsonObjects()
+Setter for returnJsonObjects
+
+| Parameter             | Type    | Default value |          |
+|-----------------------|---------|---------------|----------|
+| **returnJsonObjects** | boolean |               | Required |
+
+## Example output (as JSON strings)
 ### Get API information
 ```PHP
 $api->fetchApiInfo();
@@ -220,4 +234,4 @@ $api->fetchEndpointData('https://www.google.de', '74.125.239.111');
 ```
 
 # Terms and Conditions
-As this is just a PHP library for SSL Labs API please refer to SSL Labs Terms and Conditions at https://www.ssllabs.com/about/terms.html
+As this is just a PHP library for SSL Labs API please refer to SSL Labs terms and conditions at https://www.ssllabs.com/about/terms.html
