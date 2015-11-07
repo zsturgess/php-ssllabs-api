@@ -1,0 +1,34 @@
+{
+    "name": "bjoernr-de/php-ssllabs-api",
+    "description": "PHP library to fetch data from SSL Labs API.",
+    "type": "library",
+    "require": {
+        "doctrine/collections": "^1.3.0",
+        "guzzlehttp/guzzle": "^6.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BjoernrDe\\SslLabs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BjoernrDe\\SslLabs\\Tests\\": "tests/"
+        }
+    },
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Björn Roland",
+            "email": "dev@bjoernr.de"
+        },
+        {
+            "name": "Zac Sturgess",
+            "email": "zac.sturgess@wearetwogether.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
