@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="All Tests">
+            <directory>tests/*/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>../src</directory>
+        </whitelist>
+    </filter>
+    
+    <logging>
+        <log type="coverage-text"
+             target="php://stdout"
+             lowUpperBound="60"
+             highLowerBound="80" />
+    </logging>
+</phpunit>

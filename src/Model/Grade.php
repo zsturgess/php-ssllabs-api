@@ -21,6 +21,10 @@ class Grade {
     }
     
     public function __toString() {
+        return $this->getGrade();
+    }
+    
+    public function getGrade() {
         return $this->grade;
     }
     
