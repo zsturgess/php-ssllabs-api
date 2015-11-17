@@ -1,0 +1,32 @@
+{
+	"name" : "bjoernr-de/php-ssllabs-api",
+	"type" : "library",
+	"description" : "PHP library to fetch data from SSL Labs API",
+	"homepage" : "https://github.com/bjoernr-de/php-ssllabs-api",
+	"license" : "GNU GPL v3",
+	"authors" : [{
+			"name" : "Björn Roland",
+			"email" : "dev@bjoernr.de",
+			"homepage" : "https://github.com/bjoernr-de/php-ssllabs-api",
+			"role" : "Developer"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.0",
+		"phpunit/phpunit" : "4.8.*",
+		"phpdocumentor/phpdocumentor" : "2.*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"BjoernrDe\\SSLLabsApi\\" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"BjoernrDe\\SSLLabsApi\\" : [
+				"src/",
+				"tests/"
+			]
+		}
+	}
+}
