@@ -38,8 +38,8 @@ class GetEndpointDataCall extends GenericCall
 	/**
 	 * Send API call
 	 * 
-	 * @return SSLLabsApi\Objects\Host
-	 * @see SSLLabsApi\Calls\GenericCall::send()
+	 * @return BjoernrDe\SSLLabsApi\Objects\Host
+	 * @see BjoernrDe\SSLLabsApi\Calls\GenericCall::send()
 	 */
 	public function send()
 	{

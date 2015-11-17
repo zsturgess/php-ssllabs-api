@@ -21,8 +21,8 @@ class InfoCall extends GenericCall
 	/**
 	 * Send API call
 	 * 
-	 * @return SSLLabsApi\Objects\Info
-	 * @see SSLLabsApi\Calls\GenericCall::send()
+	 * @return BjoernrDe\SSLLabsApi\Objects\Info
+	 * @see BjoernrDe\SSLLabsApi\Calls\GenericCall::send()
 	 */
 	public function send()
 	{
