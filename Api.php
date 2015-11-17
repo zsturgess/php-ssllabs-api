@@ -1,8 +1,8 @@
 <?php
 require_once('include_me.php');
 
-use SSLLabsApi\Calls\AnalyzeCall;
-use SSLLabsApi\Calls\GetEndpointDataCall;
+use BjoernrDe\SSLLabsApi\Calls\AnalyzeCall;
+use BjoernrDe\SSLLabsApi\Calls\GetEndpointDataCall;
 
 /*
 //Analyze Call
