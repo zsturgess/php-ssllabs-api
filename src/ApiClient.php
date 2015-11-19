@@ -1,6 +1,6 @@
 <?php
 
-namespace BjoernrDe\SslLabs;
+namespace BjoernrDe\SSLLabsApi;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
@@ -46,13 +46,13 @@ class ApiClient {
      * servers, retrieve the engine and criteria version, and initialize
      * the maximum number of concurrent assessments.
      * 
-     * @return string|\BjoernrDe\SslLabs\Model\ApiInfo
+     * @return string|\BjoernrDe\SSLLabsApi\Model\ApiInfo
      */
     public function getApiInformation() {
         $response = $this->sendApiRequest('info');
         
         if ($this->hydrateResponses) {
-            $response = new Model\ApiInfo($response);
+            $response = new Model\Info($response);
             
             $this->nextAssessmentCoolOff = $response->getNewAssessmentCoolOff();
             
@@ -71,7 +71,7 @@ class ApiClient {
      * @param string $host
      * @param bool $startNew
      * @param bool $fromCache
-     * @return string|\BjoernrDe\SslLabs\Model\Host
+     * @return string|\BjoernrDe\SSLLabsApi\Model\Host
      * @throws \InvalidArgumentException If invalid host provided
      */
     public function getHostInformation($host, $startNew = false) {
@@ -105,7 +105,7 @@ class ApiClient {
      * 
      * @param string $host
      * @param string $endpoint
-     * @return string|\BjoernrDe\SslLabs\Model\Endpoint
+     * @return string|\BjoernrDe\SSLLabsApi\Model\Endpoint
      * @throws \InvalidArgumentException
      */
     public function getEndpointInformation($host, $endpoint) {
@@ -134,7 +134,7 @@ class ApiClient {
     /**
      * Get known assessment status codes
      * 
-     * @return string|\BjoernrDe\SslLabs\Model\StatusCodes
+     * @return string|\BjoernrDe\SSLLabsApi\Model\StatusCodes
      */
     public function getStatusCodes() {
         $response = $this->sendApiRequest('getStatusCodes');
@@ -160,7 +160,7 @@ class ApiClient {
      *  - An empty string to use the current default production endpoint
      * 
      * @param string $url
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setBaseUrl($url) {
         if (empty($url)) {
@@ -190,7 +190,7 @@ class ApiClient {
      * Default: true
      * 
      * @param bool $setting
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setHonorRateLimiting($setting) {
         $this->honorRateLimiting = (bool) $setting;
@@ -208,7 +208,7 @@ class ApiClient {
      * Default: true
      * 
      * @param bool $setting
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setHydrateResponses($setting) {
         $this->hydrateResponses = (bool) $setting;
@@ -225,7 +225,7 @@ class ApiClient {
      * Default: true
      * 
      * @param bool $setting
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setFullReports($setting) {
         $this->fullReports = (bool) $setting;
@@ -244,7 +244,7 @@ class ApiClient {
      * Default: false
      * 
      * @param bool $setting
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setIgnoreMismatches($setting) {
         $this->ignoreMismatches = (bool) $setting;
@@ -258,7 +258,7 @@ class ApiClient {
      * Default: false
      * 
      * @param bool $setting
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setPublishResults($setting) {
         $this->publishResults = (bool) $setting;
@@ -278,7 +278,7 @@ class ApiClient {
      * Default: 750 hours (roughly a month)
      * 
      * @param int $hours
-     * @return \BjoernrDe\SslLabs\ApiClient
+     * @return \BjoernrDe\SSLLabsApi\ApiClient
      */
     public function setCachedResultTtl($hours) {
         $this->cachedResultTtl = (int) $hours;

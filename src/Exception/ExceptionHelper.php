@@ -1,6 +1,6 @@
 <?php
 
-namespace BjoernrDe\SslLabs\Exception;
+namespace BjoernrDe\SSLLabsApi\Exception;
 
 use GuzzleHttp\Exception\BadResponseException;
 

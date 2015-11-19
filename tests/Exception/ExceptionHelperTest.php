@@ -1,9 +1,9 @@
 <?php
 
-namespace BjoernrDe\SslLabs\Tests\Exception;
+namespace BjoernrDe\SSLLabsApi\Tests\Exception;
 
-use BjoernrDe\SslLabs\ApiClient;
-use BjoernrDe\SslLabs\Exception\ExceptionHelper;
+use BjoernrDe\SSLLabsApi\ApiClient;
+use BjoernrDe\SSLLabsApi\Exception\ExceptionHelper;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
@@ -53,7 +53,7 @@ class ExceptionHelperTest extends \PHPUnit_Framework_TestCase {
             ])
         );
         
-        $this->assertInstanceOf('BjoernrDe\\SslLabs\\Exception\\AssessmentCooldownExceededException', $converted);
+        $this->assertInstanceOf('BjoernrDe\\SSLLabsApi\\Exception\\AssessmentCooldownExceededException', $converted);
     }
     
     public function test429ResponseTooMany() {
@@ -67,7 +67,7 @@ class ExceptionHelperTest extends \PHPUnit_Framework_TestCase {
             ])
         );
         
-        $this->assertInstanceOf('BjoernrDe\\SslLabs\\Exception\\TooManyAssessmentsException', $converted);
+        $this->assertInstanceOf('BjoernrDe\\SSLLabsApi\\Exception\\TooManyAssessmentsException', $converted);
     }
     
     public function test503Response() {
@@ -75,7 +75,7 @@ class ExceptionHelperTest extends \PHPUnit_Framework_TestCase {
             $this->createGuzzleException(503, [])
         );
         
-        $this->assertInstanceOf('BjoernrDe\\SslLabs\\Exception\\QualysUnavailableException', $converted);
+        $this->assertInstanceOf('BjoernrDe\\SSLLabsApi\\Exception\\QualysUnavailableException', $converted);
         $this->assertContains('scheduled maintenance', $converted->getMessage());
     }
     
@@ -84,7 +84,7 @@ class ExceptionHelperTest extends \PHPUnit_Framework_TestCase {
             $this->createGuzzleException(529, [])
         );
         
-        $this->assertInstanceOf('BjoernrDe\\SslLabs\\Exception\\QualysUnavailableException', $converted);
+        $this->assertInstanceOf('BjoernrDe\\SSLLabsApi\\Exception\\QualysUnavailableException', $converted);
         $this->assertContains('being overloaded', $converted->getMessage());
     }
     

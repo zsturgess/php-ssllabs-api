@@ -1,6 +1,6 @@
 <?php
 
-namespace BjoernrDe\SslLabs\Tests\Model;
+namespace BjoernrDe\SSLLabsApi\Tests\Model;
 
 /**
  * BaseModelTestCase
@@ -22,7 +22,7 @@ abstract class BaseModelTestCase extends \PHPUnit_Framework_TestCase {
      * @dataProvider dataProvider
      */
     public function testModel($dataSet) {
-        $modelClass = 'BjoernrDe\\SslLabs\\Model\\' . $this->getClassUnderTest();
+        $modelClass = 'BjoernrDe\\SSLLabsApi\\Model\\' . $this->getClassUnderTest();
         $model = new $modelClass($dataSet);
         
         $this->assertInstanceOf($modelClass, $model);

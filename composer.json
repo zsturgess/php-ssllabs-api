@@ -11,12 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "BjoernrDe\\SslLabs\\": "src/"
+            "BjoernrDe\\SSLLabsApi\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BjoernrDe\\SslLabs\\Tests\\": "tests/"
+            "BjoernrDe\\SSLLabsApi\\Tests\\": "tests/"
         }
     },
     "license": "GPL-3.0",

@@ -1,8 +1,8 @@
 <?php
 
-namespace BjoernrDe\SslLabs\Tests\Exception;
+namespace BjoernrDe\SSLLabsApi\Tests\Exception;
 
-use BjoernrDe\SslLabs\Exception\QualysUnavailableException;
+use BjoernrDe\SSLLabsApi\Exception\QualysUnavailableException;
 
 /**
  * QualysUnavailableExceptionTest
