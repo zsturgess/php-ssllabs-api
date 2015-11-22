@@ -14,7 +14,7 @@ class Key extends ApiObject
 		return ($this->size);
 	}
 	
-	private function setSize($size)
+	protected function setSize($size)
 	{
 		$this->size = $size;
 	}
@@ -24,7 +24,7 @@ class Key extends ApiObject
 		return ($this->strength);
 	}
 	
-	private function setStrength($strength)
+	protected function setStrength($strength)
 	{
 		$this->strength = $strength;
 	}
@@ -34,7 +34,7 @@ class Key extends ApiObject
 		return ($this->alg);
 	}
 	
-	private function setAlg($alg)
+	protected function setAlg($alg)
 	{
 		$this->alg = $alg;
 	}
@@ -44,7 +44,7 @@ class Key extends ApiObject
 		return ($this->debianFlaw);
 	}
 	
-	private function setDebianFlaw($debianFlaw)
+	protected function setDebianFlaw($debianFlaw)
 	{
 		$this->debianFlaw = $debianFlaw;
 	}
@@ -54,27 +54,8 @@ class Key extends ApiObject
 		return ($this->q);
 	}
 	
-	private function setQ($q)
+	protected function setQ($q)
 	{
 		$this->q = $q;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @return \BjoernrDe\SSLLabsApi\Objects\Key
-	 * @see \BjoernrDe\SSLLabsApi\Objects\ApiObject::populateObjectByApiResponse()
-	 */
-	public function populateObjectByApiResponse($response)
-	{
-		
-	
-		isset($response->size) ? $this->setSize($response->size) : '';
-		isset($response->alg) ? $this->setAlg($response->alg) : '';
-		isset($response->debianFlaw) ? $this->setDebianFlaw($response->debianFlaw) : '';
-		isset($response->strength) ? $this->setStrength($response->strength) : '';
-		isset($response->q) ? $this->setQ($response->q) : '';
-		
-		return ($this);
 	}
 }

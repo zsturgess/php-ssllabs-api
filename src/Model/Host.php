@@ -123,7 +123,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $host
 	 */
-	private function setHost($host)
+	protected function setHost($host)
 	{
 		$this->host = (string) $host;
 	}
@@ -143,7 +143,7 @@ class Host extends ApiObject
 	 * 
 	 * @param int $port
 	 */
-	private function setPort($port)
+	protected function setPort($port)
 	{
 		$this->port = (int) $port;
 	}
@@ -163,7 +163,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $protocol
 	 */
-	private function setProtocol($protocol)
+	protected function setProtocol($protocol)
 	{
 		$this->protocol = $protocol;
 	}
@@ -183,7 +183,7 @@ class Host extends ApiObject
 	 * 
 	 * @param boolean $isPublic
 	 */
-	private function setIsPublic($isPublic)
+	protected function setIsPublic($isPublic)
 	{
 		$this->isPublic = (boolean) $isPublic;
 	}
@@ -203,7 +203,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $status
 	 */
-	private function setStatus($status)
+	protected function setStatus($status)
 	{
 		$this->status = $status;
 	}
@@ -223,7 +223,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $statusMessage
 	 */
-	private function setStatusMessage($statusMessage)
+	protected function setStatusMessage($statusMessage)
 	{
 		$this->statusMessage = $statusMessage;
 	}
@@ -243,7 +243,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $startMessage
 	 */
-	private function setStartMessage($startMessage)
+	protected function setStartMessage($startMessage)
 	{
 		$this->startMessage = $startMessage;
 	}
@@ -263,7 +263,7 @@ class Host extends ApiObject
 	 * 
 	 * @param int $startTime
 	 */
-	private function setStartTime($startTime)
+	protected function setStartTime($startTime)
 	{
 		$this->startTime = $startTime;
 	}
@@ -283,7 +283,7 @@ class Host extends ApiObject
 	 * 
 	 * @param int $testTime
 	 */
-	private function setTestTime($testTime)
+	protected function setTestTime($testTime)
 	{
 		$this->testTime = $testTime;
 	}
@@ -303,7 +303,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $engineVersion
 	 */
-	private function setEngineVersion($engineVersion)
+	protected function setEngineVersion($engineVersion)
 	{
 		$this->engineVersion = $engineVersion;
 	}
@@ -323,7 +323,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $criteriaVersion
 	 */
-	private function setCriteriaVersion($criteriaVersion)
+	protected function setCriteriaVersion($criteriaVersion)
 	{
 		$this->criteriaVersion = $criteriaVersion;
 	}
@@ -343,7 +343,7 @@ class Host extends ApiObject
 	 * 
 	 * @param string $cacheExpiryTime
 	 */
-	private function setCacheExpiryTime($cacheExpiryTime)
+	protected function setCacheExpiryTime($cacheExpiryTime)
 	{
 		$this->cacheExpiryTime = $cacheExpiryTime;
 	}
@@ -363,7 +363,7 @@ class Host extends ApiObject
 	 * 
 	 * @param array $endpoints
 	 */
-	private function setEndpoints($endpoints)
+	protected function setEndpoints($endpoints)
 	{
 		$this->endpoints = (array)$endpoints;
 	}
@@ -383,45 +383,8 @@ class Host extends ApiObject
 	 * 
 	 * @param array $certHostnames
 	 */
-	private function setCertHostnames($certHostnames)
+	protected function setCertHostnames($certHostnames)
 	{
 		$this->certHostnames = $certHostnames;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @return \BjoernrDe\SSLLabsApi\Objects\Host
-	 * @see \BjoernrDe\SSLLabsApi\Objects\ApiObject::populateObjectByApiResponse()
-	 */
-	public function populateObjectByApiResponse($response)
-	{
-		
-		
-		isset($response->host) ? $this->setHost($response->host) : '';
-		isset($response->port) ? $this->setPort($response->port) : '';
-		isset($response->protocol) ? $this->setProtocol($response->protocol) : '';
-		isset($response->isPublic) ? $this->setIsPublic($response->isPublic) : '';
-		isset($response->status) ? $this->setStatus($response->status) : '';
-		isset($response->startMessage) ? $this->setStartMessage($response->startMessage) : '';
-		isset($response->startTime) ? $this->setStartTime($response->startTime) : '';
-		isset($response->testTime) ? $this->setTestTime($response->testTime) : '';
-		isset($response->engineVersion) ? $this->setEngineVersion($response->engineVersion) : '';
-		isset($response->criteriaVersion) ? $this->setCriteriaVersion($response->criteriaVersion) : '';
-		
-		if(isset($response->endpoints) && count($response->endpoints) > 0)
-		{
-			$endpointObjects = array();
-			
-			foreach($response->endpoints as $endpoint)
-			{
-				$endpointObject = new Endpoint($endpoint);
-				$endpointObjects[] = $endpointObject;
-			}
-			
-			$this->setEndpoints($endpointObjects);
-		}
-		
-		return ($this);
 	}
 }

@@ -8,9 +8,15 @@
          bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="All Tests">
-            <directory>tests/*/</directory>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
+    
+    <groups>
+        <exclude>
+            <group>E2E</group>
+        </exclude>
+    </groups>
 
     <filter>
         <whitelist>

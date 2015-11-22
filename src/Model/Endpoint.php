@@ -33,7 +33,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $ipAddress
 	 */
-	private function setIpAddress($ipAddress)
+	protected function setIpAddress($ipAddress)
 	{
 		$this->ipAddress = (string) $ipAddress;
 	}
@@ -53,7 +53,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $serverName
 	 */
-	private function setServerName($serverName)
+	protected function setServerName($serverName)
 	{
 		$this->serverName = (string) $serverName;
 	}
@@ -73,7 +73,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $statusMessage
 	 */
-	private function setStatusMessage($statusMessage)
+	protected function setStatusMessage($statusMessage)
 	{
 		$this->statusMessage = (string) $statusMessage;
 	}
@@ -93,7 +93,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $statusDetails
 	 */
-	private function setStatusDetails($statusDetails)
+	protected function setStatusDetails($statusDetails)
 	{
 		$this->statusDetails = (string) $statusDetails;
 	}
@@ -113,7 +113,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $statusDetailsMessage
 	 */
-	private function setStatusDetailsMessage($statusDetailsMessage)
+	protected function setStatusDetailsMessage($statusDetailsMessage)
 	{
 		$this->statusDetailsMessage = (string) $statusDetailsMessage;
 	}
@@ -133,7 +133,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $grade
 	 */
-	private function setGrade($grade)
+	protected function setGrade($grade)
 	{
 		$this->grade = (string) $grade;
 	}
@@ -151,7 +151,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param string $gradeTrustIgnored
 	 */
-	private function setGradeTrustIgnored($gradeTrustIgnored)
+	protected function setGradeTrustIgnored($gradeTrustIgnored)
 	{
 		$this->gradeTrustIgnored = (string) $gradeTrustIgnored;
 	}
@@ -171,7 +171,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param boolean $hasWarnings
 	 */
-	private function setHasWarnings($hasWarnings)
+	protected function setHasWarnings($hasWarnings)
 	{
 		$this->hasWarnings = (boolean) $hasWarnings;
 	}
@@ -191,7 +191,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param boolean $isExceptional
 	 */
-	private function setIsExceptional($isExceptional)
+	protected function setIsExceptional($isExceptional)
 	{
 		$this->isExceptional = (boolean) $isExceptional;
 	}
@@ -211,7 +211,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param int $progress
 	 */
-	private function setProgress($progress)
+	protected function setProgress($progress)
 	{
 		$this->progress = (int) $progress;
 	}
@@ -231,7 +231,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param int $duration
 	 */
-	private function setDuration($duration)
+	protected function setDuration($duration)
 	{
 		$this->duration = (int) $duration;
 	}
@@ -249,7 +249,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param int $eta
 	 */
-	private function setEta($eta)
+	protected function setEta($eta)
 	{
 		$this->eta = new \DateTime('+' . $eta . ' seconds');
 	}
@@ -269,7 +269,7 @@ class Endpoint extends ApiObject
 	 * 
 	 * @param int $delegation
 	 */
-	private function setDelegation($delegation)
+	protected function setDelegation($delegation)
 	{
 		$this->delegation = (int) $delegation;
 	}
@@ -277,7 +277,7 @@ class Endpoint extends ApiObject
 	/**
 	 * Get details
 	 * 
-	 * @return array
+	 * @return EndpointDetails
 	 */
 	public function getDetails()
 	{
@@ -287,44 +287,14 @@ class Endpoint extends ApiObject
 	/**
 	 * Set details
 	 * 
-	 * @param array $details
+	 * @param EndpointDetails $details
 	 */
-	private function setDetails($details)
+	protected function setDetails($details)
 	{
-		$this->details = (array) $details;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @return \BjoernrDe\SSLLabsApi\Objects\Endpoint
-	 * @see \BjoernrDe\SSLLabsApi\Objects\ApiObject::populateObjectByApiResponse()
-	 */
-	public function populateObjectByApiResponse($response)
-	{
-		
-		
-		isset($response->ipAddress) ? $this->setIpAddress($response->ipAddress) : '';
-                isset($response->serverName) ? $this->setServerName($response->serverName) : '';
-		isset($response->statusMessage) ? $this->setStatusMessage($response->statusMessage) : '';
-                isset($response->statusDetails) ? $this->setStatusDetails($response->statusDetails) : '';
-                isset($response->statusDetailsMessage) ? $this->setStatusDetailsMessage($response->statusDetailsMessage) : '';
-		isset($response->grade) ? $this->setGrade($response->grade) : '';
-		isset($response->gradeTrustIgnored) ? $this->setGradeTrustIgnored($response->gradeTrustIgnored) : '';
-		isset($response->hasWarnings) ? $this->setHasWarnings($response->hasWarnings) : '';
-		isset($response->isExceptional) ? $this->setIsExceptional($response->isExceptional) : '';
-		isset($response->progress) ? $this->setProgress($response->progress) : '';
-		isset($response->duration) ? $this->setDuration($response->duration) : '';
-		isset($response->eta) ? $this->setEta($response->eta) : '';
-		isset($response->delegation) ? $this->setDelegation($response->delegation) : '';
-		
-		if(isset($response->details) && !empty($response->details))
-		{
-			$endpointDetailsObject = new EndpointDetails($response->details);
-				
-			$this->setDetails($endpointDetailsObject);
-		}
-		
-		return ($this);
+            if ($details instanceof EndpointDetails) {
+		$this->details = $details;
+            } else {
+                $this->details = new EndpointDetails($details);
+            }
 	}
 }

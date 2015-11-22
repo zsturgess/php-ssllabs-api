@@ -14,7 +14,7 @@ class Info extends ApiObject
 	 * API engine version 
 	 * @var string
 	 */
-	private $version;
+	private $engineVersion;
 	
 	/**
 	 * API criteria version
@@ -57,9 +57,9 @@ class Info extends ApiObject
 	 * 
 	 * @return string
 	 */
-	public function getVersion()
+	public function getEngineVersion()
 	{
-		return ($this->version);
+		return ($this->engineVersion);
 	}
 	
 	/** 
@@ -67,9 +67,9 @@ class Info extends ApiObject
 	 * 
 	 * @param string $version
 	 */
-	private function setVersion($version)
+	protected function setEngineVersion($version)
 	{
-		$this->version = (string) $version;
+		$this->engineVersion = (string) $version;
 	}
 	
 	/**
@@ -87,7 +87,7 @@ class Info extends ApiObject
 	 * 
 	 * @param string $criteriaVersion
 	 */
-	private function setCriteriaVersion($criteriaVersion)
+	protected function setCriteriaVersion($criteriaVersion)
 	{
 		$this->criteriaVersion = (string) $criteriaVersion;
 	}
@@ -95,6 +95,7 @@ class Info extends ApiObject
 	/**
 	 * Get client max assessments
 	 * 
+         * @deprecated
 	 * @return int
 	 */
 	public function getClientMaxAssessments()
@@ -107,7 +108,7 @@ class Info extends ApiObject
 	 * 
 	 * @param int $clientMaxAssessments
 	 */
-	private function setClientMaxAssessments($clientMaxAssessments)
+	protected function setClientMaxAssessments($clientMaxAssessments)
 	{
 		$this->clientMaxAssessments = (int) $clientMaxAssessments;
 	}
@@ -127,7 +128,7 @@ class Info extends ApiObject
 	 * 
 	 * @param int $maxAssessments
 	 */
-	private function setMaxAssessments($maxAssessments)
+	protected function setMaxAssessments($maxAssessments)
 	{
 		$this->maxAssessments = (int) $maxAssessments;
 	}
@@ -147,7 +148,7 @@ class Info extends ApiObject
 	 * 
 	 * @param int $currentAssessments
 	 */	
-	private function setCurrentAssessments($currentAssessments)
+	protected function setCurrentAssessments($currentAssessments)
 	{
 		$this->currentAssessments = (int) $currentAssessments;
 	}
@@ -167,7 +168,7 @@ class Info extends ApiObject
 	 * 
 	 * @param int $newAssessmentCoolOff
 	 */
-	private function setNewAssessmentCoolOff($newAssessmentCoolOff)
+	protected function setNewAssessmentCoolOff($newAssessmentCoolOff)
 	{
 		$this->newAssessmentCoolOff = (int) $newAssessmentCoolOff;
 	}
@@ -187,29 +188,8 @@ class Info extends ApiObject
 	 * 
 	 * @param array $messages
 	 */
-	private function setMessages($messages)
+	protected function setMessages($messages)
 	{
 		$this->messages = (array) $messages;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @return \BjoernrDe\SSLLabsApi\Objects\Info
-	 * @see \BjoernrDe\SSLLabsApi\Objects\ApiObject::populateObjectByApiResponse()
-	 */
-	public function populateObjectByApiResponse($response)
-	{
-		
-
-		isset($response->engineVersion) ? $this->setVersion($response->engineVersion) : '';
-		isset($response->criteriaVersion) ? $this->setCriteriaVersion($response->criteriaVersion) : '';
-		isset($response->clientMaxAssessments) ? $this->setClientMaxAssessments($response->clientMaxAssessments) : '';
-		isset($response->maxAssessments) ? $this->setMaxAssessments($response->maxAssessments) : '';
-		isset($response->currentAssessments) ? $this->setCurrentAssessments($response->currentAssessments) : '';
-		isset($response->newAssessmentCoolOff) ? $this->setNewAssessmentCoolOff($response->newAssessmentCoolOff) : '';
-		isset($response->messages) ? $this->setMessages($response->messages) : '';
-		
-		return ($this);
 	}
 }

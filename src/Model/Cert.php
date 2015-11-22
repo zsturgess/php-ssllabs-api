@@ -29,7 +29,7 @@ class Cert extends ApiObject
 		return ($this->subject);
 	}
 	
-	private function setSubject($subject)
+	protected function setSubject($subject)
 	{
 		$this->subject = $subject;
 	}
@@ -39,7 +39,7 @@ class Cert extends ApiObject
 		return ($this->commonNames);
 	}
 	
-	private function setCommonNames($commonNames)
+	protected function setCommonNames($commonNames)
 	{
 		$this->commonNames = (array) $commonNames;
 	}
@@ -49,7 +49,7 @@ class Cert extends ApiObject
 		return ($this->altNames);
 	}
 	
-	private function setAltNames($altNames)
+	protected function setAltNames($altNames)
 	{
 		$this->altNames = (array) $altNames;
 	}
@@ -59,7 +59,7 @@ class Cert extends ApiObject
 		return ($this->notBefore);
 	}
 	
-	private function setNotBefore($notBefore)
+	protected function setNotBefore($notBefore)
 	{
 		$this->notBefore = $notBefore;
 	}
@@ -69,7 +69,7 @@ class Cert extends ApiObject
 		return ($this->notAfter);
 	}
 	
-	private function setNotAfter($notAfter)
+	protected function setNotAfter($notAfter)
 	{
 		$this->notAfter = $notAfter;
 	}
@@ -79,7 +79,7 @@ class Cert extends ApiObject
 		return ($this->issuerSubject);
 	}
 	
-	private function setIssuerSubject($issuerSubject)
+	protected function setIssuerSubject($issuerSubject)
 	{
 		$this->issuerSubject = $issuerSubject;
 	}
@@ -89,7 +89,7 @@ class Cert extends ApiObject
 		return ($this->sigAlg);
 	}
 	
-	private function setSigAlg($sigAlg)
+	protected function setSigAlg($sigAlg)
 	{
 		$this->sigAlg = $sigAlg;
 	}
@@ -99,7 +99,7 @@ class Cert extends ApiObject
 		return ($this->issuerLabel);
 	}
 	
-	private function setIssuerLabel($issuerLabel)
+	protected function setIssuerLabel($issuerLabel)
 	{
 		$this->issuerLabel = $issuerLabel;
 	}
@@ -109,7 +109,7 @@ class Cert extends ApiObject
 		return ($this->revocationInfo);
 	}
 	
-	private function setRevocationInfo($revocationInfo)
+	protected function setRevocationInfo($revocationInfo)
 	{
 		$this->revocationInfo = $revocationInfo;
 	}
@@ -119,7 +119,7 @@ class Cert extends ApiObject
 		return ($this->crlURIs);
 	}
 	
-	private function setCrlURIs($crlURIs)
+	protected function setCrlURIs($crlURIs)
 	{
 		$this->crlURIs = (array) $crlURIs;
 	}
@@ -129,7 +129,7 @@ class Cert extends ApiObject
 		return ($this->ocspURIs);
 	}
 	
-	private function setOcspURIs($ocspURIs)
+	protected function setOcspURIs($ocspURIs)
 	{
 		$this->ocspURIs = (array) $ocspURIs;
 	}
@@ -139,7 +139,7 @@ class Cert extends ApiObject
 		return ($this->revocationStatus);
 	}
 	
-	private function setRevocationStatus($revocationStatus)
+	protected function setRevocationStatus($revocationStatus)
 	{
 		$this->revocationStatus = $revocationStatus;
 	}
@@ -149,7 +149,7 @@ class Cert extends ApiObject
 		return ($this->crlRevocationStatus);
 	}
 	
-	private function setCrlRevocationStatus($crlRevocationStatus)
+	protected function setCrlRevocationStatus($crlRevocationStatus)
 	{
 		$this->crlRevocationStatus = $crlRevocationStatus;
 	}
@@ -159,7 +159,7 @@ class Cert extends ApiObject
 		return ($this->ocspRevocationStatus);
 	}
 	
-	private function setOcspRevocationStatus($ocspRevocationStatus)
+	protected function setOcspRevocationStatus($ocspRevocationStatus)
 	{
 		$this->ocspRevocationStatus = $ocspRevocationStatus;
 	}
@@ -169,7 +169,7 @@ class Cert extends ApiObject
 		return ($this->sgc);
 	}
 	
-	private function setSgc($sgc)
+	protected function setSgc($sgc)
 	{
 		$this->sgc = $sgc;
 	}
@@ -179,7 +179,7 @@ class Cert extends ApiObject
 		return ($this->validationType);
 	}
 	
-	private function setValidationType($validationType)
+	protected function setValidationType($validationType)
 	{
 		$this->validationType = $validationType;
 	}
@@ -189,7 +189,7 @@ class Cert extends ApiObject
 		return ($this->issues);
 	}
 	
-	private function setIssues($issues)
+	protected function setIssues($issues)
 	{
 		$this->issues = $issues;
 	}
@@ -199,7 +199,7 @@ class Cert extends ApiObject
 		return ($this->sct);
 	}
 	
-	private function setSct($sct)
+	protected function setSct($sct)
 	{
 		$this->sct = $sct;
 	}
@@ -209,7 +209,7 @@ class Cert extends ApiObject
 		return ($this->sha1Hash);
 	}
 	
-	private function setSha1Hash($sha1Hash)
+	protected function setSha1Hash($sha1Hash)
 	{
 		$this->sha1Hash = $sha1Hash;
 	}
@@ -219,40 +219,9 @@ class Cert extends ApiObject
 		return ($this->pinSha256);
 	}
 	
-	private function setPinSha256($pinSha256)
+	protected function setPinSha256($pinSha256)
 	{
 		$this->pinSha256 = $pinSha256;
-	}
-		
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @return \SSLLabsApi\Objects\Cert
-	 * @see \SSLLabsApi\Objects\ApiObject::populateObjectByApiResponse()
-	 */
-	public function populateObjectByApiResponse($response)
-	{
-		isset($response->subject) ? $this->setSubject($response->subject) : '';
-		isset($response->commonNames) ? $this->setCommonNames($response->commonNames) : '';
-		isset($response->altNames) ? $this->setAltNames($response->altNames) : '';
-		isset($response->notBefore) ? $this->setNotBefore($response->notBefore) : '';
-		isset($response->notAfter) ? $this->setNotAfter($response->notAfter) : '';
-		isset($response->issuerSubject) ? $this->setIssuerSubject($response->issuerSubject) : '';
-		isset($response->issuerLabel) ? $this->setIssuerLabel($response->issuerLabel) : '';
-		isset($response->sigAlg) ? $this->setSigAlg($response->sigAlg) : '';
-		isset($response->revocationInfo) ? $this->setRevocationInfo($response->revocationInfo) : '';
-		isset($response->crlURIs) ? $this->setCrlURIs($response->crlURIs) : '';
-		isset($response->ocspURIs) ? $this->setOcspURIs($response->ocspURIs) : '';
-		isset($response->revocationStatus) ? $this->setRevocationStatus($response->revocationStatus) : '';
-		isset($response->crlRevocationStatus) ? $this->setCrlRevocationStatus($response->crlRevocationStatus) : '';
-		isset($response->ocspRevocationStatus) ? $this->setOcspRevocationStatus($response->ocspRevocationStatus) : '';
-		isset($response->sgc) ? $this->setSgc($response->sgc) : '';
-		isset($response->issues) ? $this->setIssues($response->issues) : '';
-		isset($response->sct) ? $this->setSct($response->sct) : '';
-		isset($response->sha1Hash) ? $this->setSha1Hash($response->sha1Hash) : '';
-		isset($response->pinSha256) ? $this->setPinSha256($response->pinSha256) : '';
-		
-		return ($this);
 	}
 	
 }

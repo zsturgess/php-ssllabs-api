@@ -15,14 +15,14 @@ class EndpointDetails extends ApiObject
 	private $vulnBeast;
 	private $renegSupport;
 	private $stsStatus;
-	private $stsReponseHeader;
+	private $stsResponseHeader;
 	private $stsMaxAge;
 	private $stsSubdomains;
 	private $stsPreload;
 	private $pkpResponseHeader;
 	private $sessionResumption;
 	private $compressionMethods;
-	private $suportsNpn;
+	private $supportsNpn;
 	private $npnProtocols;
 	private $sessionTickets;
 	private $ocspStapling;
@@ -49,13 +49,17 @@ class EndpointDetails extends ApiObject
 	private $dhYsReuse;
 	private $logjam;
 	private $chaCha20Preference;
+        private $hstsPolicy;
+        private $hstsPreloads;
+        private $hpkpPolicy;
+        private $hpkpRoPolicy;
 	
 	public function getHostStartTime()
 	{
 		return ($this->hostStartTime);
 	}
 	
-	private function setHostStartTime($hostStartTime)
+	protected function setHostStartTime($hostStartTime)
 	{
 		$this->hostStartTime = $hostStartTime;
 	}
@@ -65,9 +69,13 @@ class EndpointDetails extends ApiObject
 		return ($this->key);
 	}
 	
-	private function setKey(Key $key)
+	protected function setKey($key)
 	{
+            if ($key instanceof Key) {
 		$this->key = $key;
+            } else {
+                $this->key = new Key($key);
+            }
 	}
 	
 	public function getCert()
@@ -75,7 +83,7 @@ class EndpointDetails extends ApiObject
 		return ($this->cert);
 	}
 	
-	private function setCert($cert)
+	protected function setCert($cert)
 	{
 		$this->cert = $cert;
 	}
@@ -85,7 +93,7 @@ class EndpointDetails extends ApiObject
 		return ($this->chain);
 	}
 	
-	private function setChain($chain)
+	protected function setChain($chain)
 	{
 		$this->chain = $chain;
 		return $this;
@@ -96,7 +104,7 @@ class EndpointDetails extends ApiObject
 		return ($this->protocols);
 	}
 	
-	private function setProtocols($protocols)
+	protected function setProtocols($protocols)
 	{
 		$this->protocols = $protocols;
 	}
@@ -106,7 +114,7 @@ class EndpointDetails extends ApiObject
 		return ($this->suites);
 	}
 	
-	private function setSuites($suites)
+	protected function setSuites($suites)
 	{
 		$this->suites = $suites;
 	}
@@ -116,7 +124,7 @@ class EndpointDetails extends ApiObject
 		return ($this->serverSignature);
 	}
 	
-	private function setServerSignature($serverSignature)
+	protected function setServerSignature($serverSignature)
 	{
 		$this->serverSignature = $serverSignature;
 	}
@@ -126,7 +134,7 @@ class EndpointDetails extends ApiObject
 		return ($this->prefixDelegation);
 	}
 	
-	private function setPrefixDelegation($prefixDelegation)
+	protected function setPrefixDelegation($prefixDelegation)
 	{
 		$this->prefixDelegation = $prefixDelegation;
 	}
@@ -136,7 +144,7 @@ class EndpointDetails extends ApiObject
 		return ($this->nonPrefixDelegation);
 	}
 	
-	private function setNonPrefixDelegation($nonPrefixDelegation)
+	protected function setNonPrefixDelegation($nonPrefixDelegation)
 	{
 		$this->nonPrefixDelegation = $nonPrefixDelegation;
 	}
@@ -146,7 +154,7 @@ class EndpointDetails extends ApiObject
 		return ($this->vulnBeast);
 	}
 	
-	private function setVulnBeast($vulnBeast)
+	protected function setVulnBeast($vulnBeast)
 	{
 		$this->vulnBeast = $vulnBeast;
 	}
@@ -156,7 +164,7 @@ class EndpointDetails extends ApiObject
 		return ($this->renegSupport);
 	}
 	
-	private function setRenegSupport($renegSupport)
+	protected function setRenegSupport($renegSupport)
 	{
 		$this->renegSupport = $renegSupport;
 	}
@@ -166,19 +174,19 @@ class EndpointDetails extends ApiObject
 		return ($this->stsStatus);
 	}
 	
-	private function setStsStatus($stsStatus)
+	protected function setStsStatus($stsStatus)
 	{
 		$this->stsStatus = $stsStatus;
 	}
 	
-	public function getStsReponseHeader()
+	public function getStsResponseHeader()
 	{
-		return ($this->stsReponseHeader);
+		return ($this->stsResponseHeader);
 	}
 	
-	private function setStsReponseHeader($stsReponseHeader)
+	protected function setStsResponseHeader($stsReponseHeader)
 	{
-		$this->stsReponseHeader = $stsReponseHeader;
+		$this->stsResponseHeader = $stsReponseHeader;
 	}
 	
 	public function getStsMaxAge()
@@ -186,7 +194,7 @@ class EndpointDetails extends ApiObject
 		return ($this->stsMaxAge);
 	}
 	
-	private function setStsMaxAge($stsMaxAge)
+	protected function setStsMaxAge($stsMaxAge)
 	{
 		$this->stsMaxAge = $stsMaxAge;
 	}
@@ -196,7 +204,7 @@ class EndpointDetails extends ApiObject
 		return ($this->stsSubdomains);
 	}
 	
-	private function setStsSubdomains($stsSubdomains)
+	protected function setStsSubdomains($stsSubdomains)
 	{
 		$this->stsSubdomains = $stsSubdomains;
 	}
@@ -206,7 +214,7 @@ class EndpointDetails extends ApiObject
 		return ($this->stsPreload);
 	}
 	
-	private function setStsPreload($stsPreload)
+	protected function setStsPreload($stsPreload)
 	{
 		$this->stsPreload = $stsPreload;
 	}
@@ -216,7 +224,7 @@ class EndpointDetails extends ApiObject
 		return ($this->pkpResponseHeader);
 	}
 	
-	private function setPkpResponseHeader($pkpResponseHeader)
+	protected function setPkpResponseHeader($pkpResponseHeader)
 	{
 		$this->pkpResponseHeader = $pkpResponseHeader;
 	}
@@ -226,7 +234,7 @@ class EndpointDetails extends ApiObject
 		return ($this->sessionResumption);
 	}
 	
-	private function setSessionResumption($sessionResumption)
+	protected function setSessionResumption($sessionResumption)
 	{
 		$this->sessionResumption = $sessionResumption;
 	}
@@ -236,19 +244,19 @@ class EndpointDetails extends ApiObject
 		return ($this->compressionMethods);
 	}
 	
-	private function setCompressionMethods($compressionMethods)
+	protected function setCompressionMethods($compressionMethods)
 	{
 		$this->compressionMethods = $compressionMethods;
 	}
 	
-	public function getSuportsNpn()
+	public function getSupportsNpn()
 	{
-		return ($this->suportsNpn);
+		return ($this->supportsNpn);
 	}
 	
-	private function setSuportsNpn($suportsNpn)
+	protected function setSupportsNpn($suportsNpn)
 	{
-		$this->suportsNpn = $suportsNpn;
+		$this->supportsNpn = $suportsNpn;
 	}
 	
 	public function getNpnProtocols()
@@ -256,7 +264,7 @@ class EndpointDetails extends ApiObject
 		return ($this->npnProtocols);
 	}
 	
-	private function setNpnProtocols($npnProtocols)
+	protected function setNpnProtocols($npnProtocols)
 	{
 		$this->npnProtocols = $npnProtocols;
 	}
@@ -266,7 +274,7 @@ class EndpointDetails extends ApiObject
 		return ($this->sessionTickets);
 	}
 	
-	private function setSessionTickets($sessionTickets)
+	protected function setSessionTickets($sessionTickets)
 	{
 		$this->sessionTickets = $sessionTickets;
 	}
@@ -276,7 +284,7 @@ class EndpointDetails extends ApiObject
 		return ($this->ocspStapling);
 	}
 	
-	private function setOcspStapling($ocspStapling)
+	protected function setOcspStapling($ocspStapling)
 	{
 		$this->ocspStapling = $ocspStapling;
 	}
@@ -286,7 +294,7 @@ class EndpointDetails extends ApiObject
 		return ($this->staplingRevocationStatus);
 	}
 	
-	private function setStaplingRevocationStatus($staplingRevocationStatus)
+	protected function setStaplingRevocationStatus($staplingRevocationStatus)
 	{
 		$this->staplingRevocationStatus = $staplingRevocationStatus;
 	}
@@ -296,7 +304,7 @@ class EndpointDetails extends ApiObject
 		return ($this->staplingRevocationErrorMessage);
 	}
 	
-	private function setStaplingRevocationErrorMessage($staplingRevocationErrorMessage)
+	protected function setStaplingRevocationErrorMessage($staplingRevocationErrorMessage)
 	{
 		$this->staplingRevocationErrorMessage = $staplingRevocationErrorMessage;
 	}
@@ -306,7 +314,7 @@ class EndpointDetails extends ApiObject
 		return ($this->sniRequired);
 	}
 	
-	private function setSniRequired($sniRequired)
+	protected function setSniRequired($sniRequired)
 	{
 		$this->sniRequired = $sniRequired;
 	}
@@ -316,7 +324,7 @@ class EndpointDetails extends ApiObject
 		return ($this->httpStatusCode);
 	}
 	
-	private function setHttpStatusCode($httpStatusCode)
+	protected function setHttpStatusCode($httpStatusCode)
 	{
 		$this->httpStatusCode = $httpStatusCode;
 	}
@@ -326,7 +334,7 @@ class EndpointDetails extends ApiObject
 		return ($this->httpForwarding);
 	}
 	
-	private function setHttpForwarding($httpForwarding)
+	protected function setHttpForwarding($httpForwarding)
 	{
 		$this->httpForwarding = $httpForwarding;
 	}
@@ -336,7 +344,7 @@ class EndpointDetails extends ApiObject
 		return ($this->supportsRc4);
 	}
 	
-	private function setSupportsRc4($supportsRc4)
+	protected function setSupportsRc4($supportsRc4)
 	{
 		$this->supportsRc4 = $supportsRc4;
 		return $this;
@@ -347,7 +355,7 @@ class EndpointDetails extends ApiObject
 		return ($this->rc4WithModern);
 	}
 	
-	private function setRc4WithModern($rc4WithModern)
+	protected function setRc4WithModern($rc4WithModern)
 	{
 		$this->rc4WithModern = $rc4WithModern;
 	}
@@ -357,7 +365,7 @@ class EndpointDetails extends ApiObject
 		return ($this->rc4Only);
 	}
 	
-	private function setRc4Only($rc4Only)
+	protected function setRc4Only($rc4Only)
 	{
 		$this->rc4Only = $rc4Only;
 	}
@@ -367,7 +375,7 @@ class EndpointDetails extends ApiObject
 		return ($this->forwardSecrecy);
 	}
 	
-	private function setForwardSecrecy($forwardSecrecy)
+	protected function setForwardSecrecy($forwardSecrecy)
 	{
 		$this->forwardSecrecy = $forwardSecrecy;
 	}
@@ -377,7 +385,7 @@ class EndpointDetails extends ApiObject
 		return ($this->sims);
 	}
 	
-	private function setSims($sims)
+	protected function setSims($sims)
 	{
 		$this->sims = $sims;
 	}
@@ -387,7 +395,7 @@ class EndpointDetails extends ApiObject
 		return ($this->heartbleed);
 	}
 	
-	private function setHeartbleed($heartbleed)
+	protected function setHeartbleed($heartbleed)
 	{
 		$this->heartbleed = $heartbleed;
 	}
@@ -397,7 +405,7 @@ class EndpointDetails extends ApiObject
 		return ($this->heartbeat);
 	}
 	
-	private function setHeartbeat($heartbeat)
+	protected function setHeartbeat($heartbeat)
 	{
 		$this->heartbeat = $heartbeat;
 	}
@@ -407,7 +415,7 @@ class EndpointDetails extends ApiObject
 		return ($this->openSslCcs);
 	}
 	
-	private function setOpenSslCcs($openSslCcs)
+	protected function setOpenSslCcs($openSslCcs)
 	{
 		$this->openSslCcs = $openSslCcs;
 	}
@@ -417,7 +425,7 @@ class EndpointDetails extends ApiObject
 		return ($this->poodle);
 	}
 	
-	private function setPoodle($poodle)
+	protected function setPoodle($poodle)
 	{
 		$this->poodle = $poodle;
 	}
@@ -427,7 +435,7 @@ class EndpointDetails extends ApiObject
 		return ($this->poodleTls);
 	}
 	
-	private function setPoodleTls($poodleTls)
+	protected function setPoodleTls($poodleTls)
 	{
 		$this->poodleTls = $poodleTls;
 	}
@@ -437,7 +445,7 @@ class EndpointDetails extends ApiObject
 		return ($this->fallbackScsv);
 	}
 	
-	private function setFallbackScsv($fallbackScsv)
+	protected function setFallbackScsv($fallbackScsv)
 	{
 		$this->fallbackScsv = $fallbackScsv;
 	}
@@ -447,7 +455,7 @@ class EndpointDetails extends ApiObject
 		return ($this->freak);
 	}
 	
-	private function setFreak($freak)
+	protected function setFreak($freak)
 	{
 		$this->freak = $freak;
 	}
@@ -457,7 +465,7 @@ class EndpointDetails extends ApiObject
 		return ($this->hasSct);
 	}
 	
-	private function setHasSct($hasSct)
+	protected function setHasSct($hasSct)
 	{
 		$this->hasSct = $hasSct;
 	}
@@ -467,7 +475,7 @@ class EndpointDetails extends ApiObject
 		return ($this->dhPrimes);
 	}
 	
-	private function setDhPrimes($dhPrimes)
+	protected function setDhPrimes($dhPrimes)
 	{
 		$this->dhPrimes = $dhPrimes;
 	}
@@ -477,7 +485,7 @@ class EndpointDetails extends ApiObject
 		return ($this->dhUsesKnownPrimes);
 	}
 	
-	private function setDhUsesKnownPrimes($dhUsesKnownPrimes)
+	protected function setDhUsesKnownPrimes($dhUsesKnownPrimes)
 	{
 		$this->dhUsesKnownPrimes = $dhUsesKnownPrimes;
 	}
@@ -487,7 +495,7 @@ class EndpointDetails extends ApiObject
 		return ($this->dhYsReuse);
 	}
 	
-	private function setDhYsReuse($dhYsReuse)
+	protected function setDhYsReuse($dhYsReuse)
 	{
 		$this->dhYsReuse = $dhYsReuse;
 	}
@@ -497,7 +505,7 @@ class EndpointDetails extends ApiObject
 		return ($this->logjam);
 	}
 	
-	private function setLogjam($logjam)
+	protected function setLogjam($logjam)
 	{
 		$this->logjam = $logjam;
 	}
@@ -507,46 +515,40 @@ class EndpointDetails extends ApiObject
 		return ($this->chaCha20Preference);
 	}
 	
-	private function setChaCha20Preference($chaCha20Preference)
+	protected function setChaCha20Preference($chaCha20Preference)
 	{
 		$this->chaCha20Preference = $chaCha20Preference;
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @return \BjoernrDe\SSLLabsApi\Objects\EndpointDetails
-	 * @see \BjoernrDe\SSLLabsApi\Objects\ApiObject::populateObjectByApiResponse()
-	 */
-	public function populateObjectByApiResponse($response)
-	{
-		isset($response->hostStartTime) ? $this->setHostStartTime($response->hostStartTime) : '';
-		
-		if(isset($response->key) && !empty($response->key))
-		{
-			$keyObject = new Key($response->key);
-		
-			$this->setKey($keyObject);
-		}
-		
-		if(isset($response->cert) && !empty($response->cert))
-		{
-			$certObject = new Cert($response->cert);
-			
-			$this->setCert($certObject);
-		}
-		
-		isset($response->statusMessage) ? $this->setStatusMessage($response->statusMessage) : '';
-		isset($response->grade) ? $this->setGrade($response->grade) : '';
-		isset($response->gradeTrustIgnored) ? $this->setGradeTrustIgnored($response->gradeTrustIgnored) : '';
-		isset($response->hasWarnings) ? $this->setHasWarnings($response->hasWarnings) : '';
-		isset($response->isExceptional) ? $this->setIsExceptional($response->isExceptional) : '';
-		isset($response->progress) ? $this->setProgress($response->progress) : '';
-		isset($response->duration) ? $this->setDuration($response->duration) : '';
-		isset($response->eta) ? $this->setEta($response->eta) : '';
-		isset($response->delegation) ? $this->setDelegation($response->delegation) : '';
-		//TODO: $response->details (EndpointDetail object)
-	
-		return ($this);
-	}
+        
+        public function getHstsPolicy() {
+                return $this->hstsPolicy;
+        }
+
+        protected function setHstsPolicy($hstsPolicy) {
+                $this->hstsPolicy = $hstsPolicy;
+        }
+        
+        public function getHstsPreloads() {
+                return $this->hstsPreloads;
+        }
+
+        protected function setHstsPreloads($hstsPreloads) {
+                $this->hstsPreloads = $hstsPreloads;
+        }
+        
+        public function getHpkpPolicy() {
+            return $this->hpkpPolicy;
+        }
+
+        protected function setHpkpPolicy($hpkpPolicy) {
+            $this->hpkpPolicy = $hpkpPolicy;
+        }
+
+        public function getHpkpRoPolicy() {
+            return $this->hpkpRoPolicy;
+        }
+
+        protected function setHpkpRoPolicy($hpkpRoPolicy) {
+            $this->hpkpRoPolicy = $hpkpRoPolicy;
+        }
 }

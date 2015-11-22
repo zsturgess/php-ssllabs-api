@@ -52,7 +52,7 @@ class ApiClient {
         $response = $this->sendApiRequest('info');
         
         if ($this->hydrateResponses) {
-            $response = new Model\Info($response);
+            $response = new Model\Info($response->getContents());
             
             $this->nextAssessmentCoolOff = $response->getNewAssessmentCoolOff();
             
@@ -94,7 +94,7 @@ class ApiClient {
         );
         
         if ($this->hydrateResponses) {
-            $response = new Model\Host($response);
+            $response = new Model\Host($response->getContents());
         }
         return $response;
     }
@@ -120,13 +120,13 @@ class ApiClient {
         $response = $this->sendApiRequest(
             'getEndpointData',
             [
-                'host'           => $host,
-                's'        => $endpoint
+                'host' => $host,
+                's'    => $endpoint
             ]
         );
         
         if ($this->hydrateResponses) {
-            $response = new Model\Endpoint($response);
+            $response = new Model\Endpoint($response->getContents());
         }
         return $response;
     }
@@ -329,8 +329,6 @@ class ApiClient {
         if ($response->hasHeader(self::CURRENT_ASSESSMENTS_HEADER)) {
             $this->currentAssessments = (int) $response->getHeaderLine(self::CURRENT_ASSESSMENTS_HEADER);
         }
-
-        $this->nextAssessment = new \DateTime('+ ' . $this->nextAssessmentCoolOff . ' seconds');
     }
     
     /**
@@ -354,6 +352,7 @@ class ApiClient {
         }
         
         if (new \DateTime() > $this->nextAssessment) {
+            $this->nextAssessment = new \DateTime('+ ' . $this->nextAssessmentCoolOff . ' seconds');
             return;
         }
         
