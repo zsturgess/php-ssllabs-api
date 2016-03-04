@@ -5,9 +5,9 @@ namespace BjoernrDe\SSLLabsApi\Model;
 /**
  * Simulation
  */
-class Simulation {
+class Simulation extends ApiObject {
     private $client;
-    private $errorCide;
+    private $errorCode;
     private $attempts;
     private $protocolId;
     private $suiteId;
@@ -16,8 +16,8 @@ class Simulation {
         return $this->client;
     }
 
-    public function getErrorCide() {
-        return $this->errorCide;
+    public function getErrorCode() {
+        return $this->errorCode;
     }
 
     public function getAttempts() {
@@ -40,8 +40,8 @@ class Simulation {
         }
     }
 
-    protected function setErrorCide($errorCide) {
-        $this->errorCide = $errorCide;
+    protected function setErrorCode($errorCode) {
+        $this->errorCode = $errorCode;
     }
 
     protected function setAttempts($attempts) {

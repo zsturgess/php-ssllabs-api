@@ -2,7 +2,7 @@
 
 namespace BjoernrDe\SSLLabsApi\Model;
 
-class SimClient
+class SimClient extends ApiObject
 {
     private $id;
     private $name;

@@ -32,6 +32,4 @@ class Suites
     protected function setPreference($preference) {
         $this->preference = $preference;
     }
-
-
 }

@@ -17,6 +17,9 @@ class ChainCert extends ApiObject
     private $keyStrength;
     private $revocationStatus;
     private $crlRevocationStatus;
+    private $ocspRevocationStatus;
+    private $sha1Hash;
+    private $pinSha256;
     private $raw;
     
     public function __construct($data) {
@@ -92,11 +95,11 @@ class ChainCert extends ApiObject
     }
 
     protected function setNotBefore($notBefore) {
-        $this->notBefore = new \DateTime($notBefore);
+        $this->notBefore = new \DateTime('@' . $notBefore);
     }
 
     protected function setNotAfter($notAfter) {
-        $this->notAfter = new \DateTime($notAfter);
+        $this->notAfter = new \DateTime('@' . $notAfter);
     }
 
     protected function setIssuerSubject($issuerSubject) {
@@ -138,4 +141,33 @@ class ChainCert extends ApiObject
     protected function setRaw($raw) {
         $this->raw = $raw;
     }
+    
+    public function getOcspRevocationStatus() {
+        return $this->ocspRevocationStatus;
+    }
+
+    protected function setOcspRevocationStatus($ocspRevocationStatus) {
+        $this->ocspRevocationStatus = $ocspRevocationStatus;
+        return $this;
+    }
+    
+    public function getSha1Hash() {
+        return $this->sha1Hash;
+    }
+
+    public function getPinSha256() {
+        return $this->pinSha256;
+    }
+
+    protected function setSha1Hash($sha1Hash) {
+        $this->sha1Hash = $sha1Hash;
+        return $this;
+    }
+
+    protected function setPinSha256($pinSha256) {
+        $this->pinSha256 = $pinSha256;
+        return $this;
+    }
+
+
 }

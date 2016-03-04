@@ -17,10 +17,10 @@ class ApiObject
     public function populateObjectByApiResponse($response)
     {
         foreach ($response as $key => $value) {
-            $setterMethod = 'set'.ucfirst($key);
+            $setterMethod = 'set' . ucfirst($key);
 
             if (!method_exists($this, $setterMethod)) {
-                trigger_error('Got a property '.$key.' from Qualys that is not supported by this version of php-ssllabs-api.');
+                trigger_error('Got a property ' . $key . ' from Qualys that is not supported by this version of php-ssllabs-api.');
             } else {
                 $this->{$setterMethod}($value);
             }

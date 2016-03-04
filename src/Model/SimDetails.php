@@ -2,7 +2,7 @@
 
 namespace BjoernrDe\SSLLabsApi\Model;
 
-class SimDetails
+class SimDetails extends ApiObject
 {
     private $results = array();
     
