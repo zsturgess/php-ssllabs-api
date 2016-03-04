@@ -86,7 +86,11 @@ class EndpointDetails extends ApiObject
 
     protected function setCert($cert)
     {
-        $this->cert = $cert;
+        if ($cert instanceof Cert) {
+            $this->cert = $cert;
+        } else {
+            $this->cert = new Cert($cert);
+        }
     }
 
     public function getChain()
@@ -96,7 +100,11 @@ class EndpointDetails extends ApiObject
 
     protected function setChain($chain)
     {
-        $this->chain = $chain;
+        if ($chain instanceof Chain) {
+            $this->chain = $chain;
+        } else {
+            $this->chain = new Chain($chain);
+        }
 
         return $this;
     }
@@ -108,6 +116,16 @@ class EndpointDetails extends ApiObject
 
     protected function setProtocols($protocols)
     {
+        if (!is_array($protocols)) {
+            $protocols = [$protocols];
+        }
+        
+        foreach ($protocols as $key => $protocol) {
+            if (!$protocol instanceof Protocol) {
+                $protocols[$key] = new Protocol($protocol);
+            }
+        }
+        
         $this->protocols = $protocols;
     }
 
@@ -118,7 +136,11 @@ class EndpointDetails extends ApiObject
 
     protected function setSuites($suites)
     {
-        $this->suites = $suites;
+        if ($suites instanceof Suites) {
+            $this->suites = $suites;
+        } else {
+            $this->suites = new Suites($suites);
+        }
     }
 
     public function getServerSignature()
@@ -390,7 +412,11 @@ class EndpointDetails extends ApiObject
 
     protected function setSims($sims)
     {
-        $this->sims = $sims;
+        if ($sims instanceof SimDetails) {
+            $this->sims = $sims;
+        } else {
+            $this->sims = new SimDetails($sims);
+        }
     }
 
     public function getHeartbleed()

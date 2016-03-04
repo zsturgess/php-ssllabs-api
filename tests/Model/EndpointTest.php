@@ -29,17 +29,11 @@ class EndpointTest extends BaseModelTestCase {
     }
     
     public function mapPropertiesToGetters() {
-        return [
-            'hasWarnings' => 'hasWarnings',
-            'isExceptional' => 'isExceptional',
-            'fakeDetails' => 'hasDetails'
-        ];
+        return [];
     }
     
     public function mapPropertiesToExpectedValues() {
         return [
-            'grade' => 'D',
-            'gradeTrustIgnored' => 'A+',
             'eta' => new \DateTime('+ 7 seconds')
         ];
     }

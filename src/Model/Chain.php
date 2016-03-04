@@ -14,6 +14,16 @@ class Chain extends ApiObject
 
     protected function setChain($chain)
     {
+        if (!is_array($chain)) {
+            $chain = [$chain];
+        }
+        
+        foreach ($chain as $key => $cert) {
+            if (!$cert instanceof ChainCert) {
+                $chain[$key] = new ChainCert($cert);
+            }
+        }
+        
         $this->chain = $chain;
     }
 

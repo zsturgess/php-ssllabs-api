@@ -58,4 +58,17 @@ class ApiClientE2ETest extends \PHPUnit_Framework_TestCase
         
         // @todo: Lots more testing of details
     }
+    
+    public function testGetRootCertsRaw() {
+        $response = $this->apiClient->getRootCertsRaw();
+        
+        $this->assertInternalType('array', $response);
+        $this->assertGreaterThan(1, count($response));
+        
+        foreach ($response as $cert) {
+            $this->assertInternalType('string', $cert);
+            $this->assertContains('-----BEGIN CERTIFICATE-----', $cert);
+            $this->assertStringEndsWith('-----END CERTIFICATE-----', $cert);
+        }
+    }
 }

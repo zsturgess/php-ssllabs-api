@@ -17,7 +17,7 @@ class Endpoint extends ApiObject
     private $duration;
     private $eta;
     private $delegation;
-    private $details = array();
+    private $details;
 
     /**
      * Get endpoint ip address (in IPv4 or IPv6 format).

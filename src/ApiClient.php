@@ -157,6 +157,17 @@ class ApiClient
 
         return $response;
     }
+    
+    public function getRootCertsRaw()
+    {
+        $response = $this->sendApiRequest('getRootCertsRaw');
+        
+        if ($this->hydrateResponses) {
+            $response = explode(PHP_EOL . PHP_EOL, trim($response));
+        }
+        
+        return $response;
+    }
 
     /* --------------------
      * --------------------
