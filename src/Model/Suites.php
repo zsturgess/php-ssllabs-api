@@ -2,7 +2,7 @@
 
 namespace BjoernrDe\SSLLabsApi\Model;
 
-class Suites
+class Suites extends ApiObject
 {
     private $list = array();
     private $preference;

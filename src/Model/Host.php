@@ -2,6 +2,8 @@
 
 namespace BjoernrDe\SSLLabsApi\Model;
 
+use BjoernrDe\SSLLabsApi\Model\Endpoint;
+
 /**
  * SSLLabs Host object.
  *
@@ -369,7 +371,17 @@ class Host extends ApiObject
      */
     protected function setEndpoints($endpoints)
     {
-        $this->endpoints = (array) $endpoints;
+        if (!is_array($endpoints)) {
+            $endpoints = [$endpoints];
+        }
+        
+        foreach ($endpoints as $key => $endpoint) {
+            if (!$endpoint instanceof Endpoint) {
+                $endpoints[$key] = new Endpoint($endpoint);
+            }
+        }
+        
+        $this->endpoints = $endpoints;
     }
 
     /**
