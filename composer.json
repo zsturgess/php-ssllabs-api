@@ -1,4 +1,4 @@
-{
+{    
     "name": "bjoernr-de/php-ssllabs-api",
     "description": "PHP library to fetch data from SSL Labs API.",
     "type": "library",

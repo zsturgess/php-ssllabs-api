@@ -1,3 +1,6 @@
+# Refactoring branch
+Do not use this branch in production.
+
 # PHP-SSLLabs-API
 This PHP library provides basic access to the SSL Labs API.
 
